@@ -1,75 +1,66 @@
-# AURELIA INVITATION STUDIO — Situs Publik (Redesign Master Prompt)
+# AURELIA INVITATION STUDIO — Situs Publik Multi-Page
 
-Situs statis, tanpa framework, tanpa package manager, tanpa build command.
-Halaman: index.html (beranda + katalog + paket + form) dan demo.html (pratinjau per template).
-File lain: styles.css, app.js, vercel.json, robots.txt, sitemap.xml.
+Situs statis multi-page, tanpa framework, tanpa package manager, tanpa build command.
+Satu sumber data: data.js (40 template, paket, add-on, kupon, kontak).
+Logika bersama: site.js. Galeri: gallery.js. Pemesanan: order.js.
 
-## 1. Ringkasan perubahan desain
-- Design tokens persis dari brief: Warm Ivory #F8F5EF, Champagne Beige #E8DDCE, Soft Taupe #A79886, Deep Espresso #352D28, Muted Sage #A7AD99, White #FFFFFF.
-- Homepage diurutkan: announcement bar (info aktual saja, tanpa countdown/kelangkaan palsu), header + menu HP, hero baru, keunggulan, koleksi unggulan, cara pemesanan 7 langkah, katalog, paket, add-on, contoh, form multistep, FAQ, kebijakan, footer dengan tahun copyright otomatis.
-- Hero baru: "Rayakan Kisah Cintamu dengan Undangan Digital yang Berkesan." + subheadline dari brief, CTA Jelajahi Koleksi dan Konsultasi via WhatsApp, mockup smartphone CSS (bukan foto).
-- Katalog: 2 kolom HP (termasuk penyesuaian 320–380px), 3 tablet, 4 desktop; pencarian nama/kode, filter tema, urutan (unggulan dulu / nama / kategori), filter hanya unggulan, reset filter, empty state informatif, template terpilih tersimpan di localStorage perangkat dan tetap terlihat saat kembali dari demo.
-- Form pemesanan multistep 6 langkah dengan indikator progres, tombol kembali/lanjut, validasi per langkah, state tidak hilang saat kembali, dan langkah 6 berisi ringkasan final + tombol Salin Ringkasan + tombol WhatsApp.
+## Route
+- / — Homepage (index.html)
+- /collections — Galeri semua template (collections.html)
+- /collections/:slug — Detail template (collection.html, slug dibaca dari path atau ?slug=)
+- /demo/:slug — Demo interaktif per template (demo.html, slug dibaca dari path atau ?slug=)
+- /pricing — Paket harga (pricing.html)
+- /addons — Add-on (addons.html)
+- /order — Form pemesanan multistep (order.html)
+- /faq — FAQ (faq.html)
+- /contact — Kontak (contact.html)
+- /privacy — Kebijakan privasi (privacy.html)
+- /terms — Syarat dan ketentuan (terms.html)
+- /revision — Kebijakan revisi dan pengembalian dana (revision.html)
+- Routing Vercel: vercel.json rewrites + cleanUrls, agar direct URL dan refresh tetap bekerja.
 
-## 2. Halaman dan komponen yang diubah
-- index.html, styles.css, app.js (perubahan utama)
-- demo.html dipertahankan dengan data katalog yang sama; tautan Pesan dari demo mengisi template di form.
-- Baru: robots.txt, sitemap.xml
-- Tidak diubah: vercel.json
+## Jumlah template yang memiliki thumbnail valid dan demo aktif — JUJUR
+- Thumbnail valid berupa screenshot/gambar desain asli: 0 dari 40. File gambar asli belum tersedia di proyek situs publik ini.
+- Thumbnail pratinjau gaya berbasis kategori (CSS, konsisten, berbeda per kategori): 40 dari 40.
+- Demo aktif: 40 dari 40, memakai renderer berbasis kategori dan metadata yang benar-benar ada (cover, detail contoh, lokasi contoh, hitung mundur ke tanggal contoh, RSVP demo lokal). Demo ini BUKAN replika final desain asli, dan ditandai DEMO di halaman.
+- Fitur yang masih simulasi: RSVP di demo (hanya tampil di perangkat, tidak tersimpan, tidak dikirim), pratinjau gaya, dan hitung mundur ke tanggal contoh.
+- Tidak ditambahkan: musik demo dan galeri foto asli, karena belum didukung/diuji.
 
-## 3. Fitur baru
-- Menu navigasi HP, announcement bar, koleksi unggulan, cara pemesanan visual, contoh hasil (pratinjau template, bukan undangan asli pelanggan)
-- Filter tema + urutan + reset filter + empty state
-- Penyimpanan pilihan template di localStorage
-- Form multistep dengan data acara: nama pasangan, tanggal, waktu, lokasi, alamat/tautan peta, detail acara, catatan (wajib hanya nama pemesan + nomor WhatsApp + template + paket)
-- Validasi nomor WhatsApp (digit 9–15, diawali 0 atau 62) dan tanggal, error di dekat kolom
-- Kupon dengan tombol Terapkan + status berhasil/gagal (hanya AURELIA10 yang dikenali)
-- Pesan WhatsApp terstruktur sesuai format brief, ter-encode, plus tombol Salin Ringkasan sebagai cadangan
-- Stub analytics yang tidak aktif (AURELIA_ANALYTICS_ID kosong) dan tidak mengirim nama/nomor/detail acara
-- SEO dasar: canonical, Open Graph, favicon, robots.txt, sitemap.xml
+## File yang diubah pada multi-page ini
+- Baru: data.js, site.js, gallery.js, order.js, collections.html, collection.html, pricing.html, addons.html, order.html, faq.html, contact.html, privacy.html, terms.html, revision.html
+- Diubah total: index.html (homepage saja), demo.html (demo interaktif per template), styles.css (animasi envelope/floating/petal/ribbon/selected/page fade, reduced motion), vercel.json (rewrites), sitemap.xml, README.md
+- Dihapus: app.js lama (digantikan data.js/site.js/gallery.js/order.js)
+- Dipertahankan: robots.txt, data harga, kupon, nomor WhatsApp, kontak, dan seluruh 40 template.
 
-## 4. Bug yang diperbaiki
-- Bug modal demo sebelumnya (CSS display:flex menimpa hidden, modal tampil kosong dan tidak bisa ditutup) sudah diperbaiki pada commit 87f6cb1 dan dipertahankan di redesign ini: aturan .modal[hidden]{display:none !important} + penguncian scroll.
-- Tidak ada bug baru yang ditemukan pada pemeriksaan lokal kali ini.
+## Fitur yang berhasil diuji (lokal, 2026-10-28)
+- Sintaks: node --check data.js, site.js, gallery.js, order.js lolos.
+- Data: 40 template, 12 unggulan, 4 paket, 9 add-on.
+- Hitungan: Signature Rp99.000 + Custom Domain Rp75.000 − diskon Rp9.900 = Rp164.100; total tidak negatif.
+- Server lokal: semua 12 halaman + robots + sitemap + 4 file JS + CSS mengembalikan 200.
+- Logika slug dari path /collections/:slug dan /demo/:slug sudah ditulis di data.js (slugFromUrl), tetapi rewrite Vercel-nya sendiri baru bisa diverifikasi setelah deploy (lihat pengujian manual di bawah).
 
-## 5. Fitur lama yang dipertahankan
-- URL, nomor WhatsApp 6281290603522, harga paket (Starter Rp49.000, Signature Rp99.000, Royal Rp179.000, Custom sesuai kebutuhan), harga 9 add-on, kupon AURELIA10 (10% dari harga paket), seluruh 40 template (12 unggulan), kontak admin, dan info transfer manual Bank BCA.
-- Tidak ada label "Paling Populer" (tidak ada data pendukung), tidak ada testimoni (belum ada testimoni pelanggan nyata), tidak ada klaim revisi tanpa batas / pengerjaan instan / garansi / sertifikasi / jumlah pelanggan.
+## Error yang ditemukan
+- Tidak ada error sintaks atau error server lokal.
+- Audit awal: proyek sebelumnya satu halaman (index + demo), data hardcoded di app.js, tidak ada thumbnail asli, tidak ada router, tidak ada API/auth, Supabase tidak terhubung live ke situs publik. Semua itu dicatat di sini, bukan disembunyikan.
 
-## 6. Hasil build dan pengujian (lokal, 2026-10-28)
-- Situs statis, tanpa build command; node --check app.js lolos.
-- Data: 40 template, 12 unggulan, 9 add-on terverifikasi dari file.
-- Hitungan: Signature Rp99.000 + Custom Domain Rp75.000 − diskon Rp9.900 = Rp164.100; Starter tanpa add-on/kupon = Rp49.000; kupon salah = tanpa diskon; total tidak negatif (Math.max 0).
-- Server lokal: index 200, demo?template=botanical-green 200, robots.txt 200, sitemap.xml 200.
-- Pencarian secret di frontend: tidak ditemukan service-role key atau kredensial (hanya kata "secret" di kalimat penjelasan README lama yang sudah diganti di versi ini).
-
-## 7. Masalah yang belum terselesaikan
-- Thumbnail kartu masih pratinjau gaya CSS, bukan gambar desain asli template, karena file gambar desain asli belum tersedia di proyek situs publik ini. Jangan klaim kartu itu foto desain asli.
-- Filter gaya dan warna tidak tersedia karena metadata gaya/warna tidak ada di data katalog.
-- Pesanan WhatsApp tidak otomatis masuk ke database situs publik ini. Supabase memiliki tabel orders dll., tetapi situs publik ini tidak menulis pesanan ke Supabase dan tidak punya dashboard admin. Itu rekomendasi pengembangan berikutnya, bukan fitur yang diklaim berjalan.
-- RLS Supabase masih kebijakan contoh dasar dan perlu diuji ulang sebelum go-live penuh (temuan sebelumnya, belum diubah di langkah ini).
-- Tabel settings Supabase masih kosong; data kontak di situs ini berasal dari file situs, belum disinkronkan ke tabel settings.
-
-## 8. Konfigurasi yang masih membutuhkan data dari pemilik
-- Detail fitur tiap paket, batas revisi, masa aktif, dan waktu pengerjaan — ditandai "Dikonfigurasi admin" di situs.
-- Kebijakan revisi dan pembatalan/pengembalian dana tertulis — belum ditetapkan, diarahkan ke konfirmasi admin.
-- Gambar desain asli tiap template, jika ingin thumbnail benar-benar sesuai desain.
+## Data yang masih membutuhkan aset atau konfigurasi pemilik
+- Gambar/screenshot desain asli tiap template, jika ingin thumbnail benar-benar sesuai desain.
+- Deskripsi dan fitur detail asli tiap template (saat ini deskripsi dibuat dari nama + kategori).
 - Metadata gaya/warna tiap template, jika ingin filter gaya/warna.
-- ID analytics, jika pemilik ingin mengaktifkan analytics (saat ini kosong dan tidak aktif).
+- Detail fitur paket, batas revisi, masa aktif, waktu pengerjaan, dan kebijakan revisi/pengembalian dana tertulis.
+- Gambar galeri asli dan data acara asli (demo memakai contoh yang ditandai DEMO).
+- ID analytics (saat ini tidak aktif).
+- Sinkronisasi tabel settings Supabase dan pengujian ulang RLS contoh dasar.
 
-## 9. Instruksi menjalankan proyek
-- Situs statis: buka index.html langsung, atau jalankan server lokal dari folder ini, contoh: python3 -m http.server 8000, lalu buka http://127.0.0.1:8000/index.html
-- Tidak ada instalasi dependensi dan tidak ada build.
+## Hasil production build
+- Tidak ada build command (situs statis). "Build" di sini adalah pemeriksaan sintaks dan server lokal di atas, yang lolos. Production build framework tidak berlaku untuk proyek ini.
 
-## 10. Instruksi deployment ke Vercel
-1. Commit dan push file yang diubah ke repo GitHub aurelia-invitation-studio-public, branch main.
+## Langkah deployment Vercel
+1. Commit dan push semua file baru/ubah dan hapus app.js lama ke repo GitHub aurelia-invitation-studio-public, branch main.
 2. Vercel (proyek aurelia-invitation-studio-public, tim trial, Hobby) otomatis deploy dari repo itu — framework Other/static, tanpa build command, tanpa environment variable rahasia.
-3. Tunggu status Ready, lalu buka https://aurelia-invitation-studio-public.vercel.app dan cek: hero, menu HP, pencarian/filter katalog, demo, form multistep, ringkasan, dan tombol WhatsApp.
-4. Jika ada perubahan data kontak/harga di masa depan, ubah di file situs ini dan di data Supabase secara bersamaan, lalu deploy ulang.
+3. Tunggu Ready, lalu buka https://aurelia-invitation-studio-public.vercel.app dan uji route langsung di bawah.
 
-## 11. Pengujian manual yang masih harus dilakukan
-- Buka situs live di HP 320–430px, tablet, dan desktop; cek tidak ada horizontal overflow dan modal bisa ditutup.
-- Coba alur penuh: pilih template dari katalog → paket → add-on → isi data → terapkan kupon → tinjau → salin ringkasan → buka WhatsApp, dan pastikan pesan yang terbuka sama dengan ringkasan.
-- Coba kembali ke langkah sebelumnya dan pastikan pilihan tidak hilang.
-- Coba input salah (nama kosong, nomor WhatsApp tidak valid, template/paket belum dipilih) dan pastikan error tampil di dekat kolom.
-- Coba filter yang tidak menghasilkan apa-apa dan tombol Reset Filter.
+## Pengujian manual yang masih harus dilakukan (BELUM DIUJI di live)
+- Buka langsung /collections, /collections/botanical-green, /demo/botanical-green, /pricing, /addons, /order, /faq, /contact, /privacy, /terms, /revision, lalu refresh tiap halaman dan pakai tombol back browser.
+- Alur penuh: koleksi → detail → demo → pilih → order (template terisi) → ganti paket → tambah/hapus add-on → kupon → total → pesan WhatsApp, pastikan pesan sama dengan ringkasan.
+- HP 320–430px, tablet, desktop: tanpa overflow, tombol mudah disentuh, modal/demo bisa ditutup, reduced motion dihormati.

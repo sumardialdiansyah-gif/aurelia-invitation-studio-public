@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pemesanan — AURELIA INVITATION STUDIO</title>
+<meta name="description" content="Form pemesanan multistep AURELIA: template, paket, add-on, data acara, ringkasan, dan konfirmasi WhatsApp.">
+<link rel="canonical" href="https://aurelia-invitation-studio-public.vercel.app/order">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="announcement">Membuka WhatsApp bukan berarti pembayaran berhasil. Pesanan diproses setelah admin memverifikasi transfer manual.</div>
+<header class="top">
+  <div class="brand">AURELIA <span>INVITATION STUDIO</span></div>
+  <button id="menu-btn" class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+  <nav id="main-nav" aria-label="Navigasi utama">
+    <a href="/">Beranda</a><a href="/collections">Koleksi Desain</a><a href="/pricing">Paket Harga</a><a href="/addons">Add-on</a><a href="/order">Pesan</a><a href="/faq">FAQ</a><a href="/contact">Kontak</a><a class="btn nav-cta wa-link" href="#">Konsultasi WhatsApp</a>
+  </nav>
+</header>
+<main>
+  <h1>Form Pemesanan</h1>
+  <p id="step-indicator" class="steps" aria-live="polite"></p>
+  <form id="order-form" novalidate>
+    <div class="step" data-step="1"><h2>Langkah 1 — Pilih Desain</h2>
+      <label> Template * <select id="order-template" required></select></label>
+      <p class="small">Belum memilih? <a href="/collections">Kembali ke koleksi</a> dan tekan “Pilih Desain Ini”.</p>
+    </div>
+    <div class="step" data-step="2" hidden><h2>Langkah 2 — Pilih Paket</h2>
+      <label> Paket * <select id="order-package" required></select></label>
+      <div id="package-cards" class="grid package-grid"></div>
+    </div>
+    <div class="step" data-step="3" hidden><h2>Langkah 3 — Pilih Add-on</h2>
+      <fieldset><legend>Add-on (opsional, bisa pilih lebih dari satu)</legend><div id="order-addons" class="addon-checks"></div></fieldset>
+    </div>
+    <div class="step" data-step="4" hidden><h2>Langkah 4 — Informasi Pemesan dan Acara</h2>
+      <div class="form-grid">
+        <label> Nama pemesan * <input id="order-name" type="text" autocomplete="name" required placeholder="Nama lengkap"><span class="field-error" id="err-name"></span></label>
+        <label> Nomor WhatsApp * <input id="order-phone" type="tel" autocomplete="tel" required placeholder="Contoh: 0812xxxx atau 62812xxxx"><span class="field-error" id="err-phone"></span></label>
+        <label> Nama pasangan (opsional) <input id="order-couple" type="text" placeholder="Nama pasangan"></label>
+        <label> Tanggal acara (opsional) <input id="order-date" type="date"><span class="field-error" id="err-date"></span></label>
+        <label> Waktu acara (opsional) <input id="order-time" type="time"></label>
+        <label> Lokasi acara (opsional) <input id="order-location" type="text" placeholder="Nama tempat / kota"></label>
+      </div>
+      <label> Alamat atau tautan peta (opsional) <input id="order-map" type="text" placeholder="Alamat lengkap atau tautan Google Maps"></label>
+      <label> Detail acara tambahan (opsional) <textarea id="order-detail" rows="3"></textarea></label>
+      <label> Catatan khusus (opsional) <textarea id="order-note" rows="3"></textarea></label>
+    </div>
+    <div class="step" data-step="5" hidden><h2>Langkah 5 — Tinjau Ringkasan</h2>
+      <label> Kupon (opsional) <input id="order-coupon" type="text" placeholder="Contoh: AURELIA10" autocomplete="off"></label>
+      <button id="apply-coupon" class="btn secondary" type="button">Terapkan Kupon</button>
+      <p id="coupon-status" class="small" aria-live="polite"></p>
+      <div class="summary"><h3>Ringkasan Pesanan</h3><dl id="order-summary"></dl><p id="order-total"></p><p class="small" id="custom-note" hidden>Paket Custom: harga paket dihitung admin sesuai kebutuhan. Total di atas baru mencakup add-on yang dipilih, belum harga paket Custom.</p></div>
+    </div>
+    <div class="step" data-step="6" hidden><h2>Langkah 6 — Lanjutkan ke WhatsApp</h2>
+      <div class="summary"><dl id="final-summary"></dl><p id="final-total"></p></div>
+      <p>Tekan tombol WhatsApp di bawah. WhatsApp akan terbuka dengan pesan yang sudah terisi dari pesanan terkini. Kamu tetap harus menekan Kirim di WhatsApp. Pesan tidak terkirim otomatis, dan pesanan tidak dianggap berhasil hanya karena WhatsApp terbuka.</p>
+      <button id="copy-summary" class="btn secondary" type="button">Salin Ringkasan (Cadangan)</button>
+      <p id="copy-status" class="small" aria-live="polite"></p>
+      <button id="order-btn" class="btn big" type="submit">Lanjutkan ke WhatsApp</button>
+      <h3>Pembayaran transfer manual</h3>
+      <p>Bank BCA • Nomor rekening 6881131649 • Atas nama Sumardi. Setelah transfer, kirim bukti pembayaran lewat WhatsApp ke admin untuk diverifikasi sebelum pesanan diproses.</p>
+    </div>
+    <p id="form-error" class="error" role="alert" hidden></p>
+    <div class="step-nav"><button id="prev-btn" class="btn secondary" type="button" hidden>Kembali</button><button id="next-btn" class="btn" type="button">Lanjut</button></div>
+  </form>
+</main>
+<footer>
+  <p><strong>AURELIA INVITATION STUDIO</strong></p>
+  <nav aria-label="Navigasi footer"><a href="/">Beranda</a> • <a href="/collections">Koleksi</a> • <a href="/pricing">Paket</a> • <a href="/faq">FAQ</a> • <a href="/contact">Kontak</a></nav>
+  <p>© <span class="copyright-year"></span> AURELIA INVITATION STUDIO.</p>
+</footer>
+<script src="data.js"></script><script src="site.js"></script><script src="gallery.js"></script><script src="order.js"></script>
+</body>
+</html>

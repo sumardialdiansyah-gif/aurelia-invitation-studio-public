@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Koleksi Desain — AURELIA INVITATION STUDIO</title>
+<meta name="description" content="Galeri semua template AURELIA INVITATION STUDIO: 40 template, pencarian, filter tema, demo, dan pilih desain.">
+<link rel="canonical" href="https://aurelia-invitation-studio-public.vercel.app/collections">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#templates">Lewati ke galeri</a>
+<div class="announcement">Konsultasi WhatsApp tersedia 08.00–22.00 WIB • Kupon AURELIA10 aktif.</div>
+<header class="top">
+  <div class="brand">AURELIA <span>INVITATION STUDIO</span></div>
+  <button id="menu-btn" class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+  <nav id="main-nav" aria-label="Navigasi utama">
+    <a href="/">Beranda</a><a href="/collections">Koleksi Desain</a><a href="/pricing">Paket Harga</a><a href="/addons">Add-on</a><a href="/order">Pesan</a><a href="/faq">FAQ</a><a href="/contact">Kontak</a><a class="btn nav-cta wa-link" href="#">Konsultasi WhatsApp</a>
+  </nav>
+</header>
+<main>
+  <h1>Koleksi Desain</h1>
+  <p>Semua 40 template yang sudah ada dipertahankan. Template yang kamu pilih tersimpan di perangkat ini dan tetap terpilih saat kembali dari detail atau demo.</p>
+  <div id="selected-banner" class="note" hidden></div>
+  <div class="filters">
+    <label> Cari template <input id="search" type="search" placeholder="Cari nama atau kode, misal Botanical…" aria-label="Cari template"></label>
+    <label> Filter tema <select id="category-filter" aria-label="Filter tema"></select></label>
+    <label> Urutkan <select id="sort-filter" aria-label="Urutkan template"><option value="featured">Unggulan dulu</option><option value="name">Nama A–Z</option><option value="category">Kategori</option></select></label>
+    <label class="check-label"><input id="featured-only" type="checkbox"> Hanya unggulan (12)</label>
+    <button id="reset-filters" class="btn secondary" type="button">Reset Filter</button>
+  </div>
+  <p class="small">Filter gaya dan warna tidak ditambahkan, karena metadata gaya dan warna tidak tersedia di data katalog saat ini. Thumbnail adalah pratinjau gaya berbasis kategori, bukan foto desain asli template.</p>
+  <p id="result-count" class="small" aria-live="polite"></p>
+  <div id="templates" class="grid catalog-grid"></div>
+</main>
+<footer>
+  <p><strong>AURELIA INVITATION STUDIO</strong></p>
+  <nav aria-label="Navigasi footer"><a href="/">Beranda</a> • <a href="/pricing">Paket</a> • <a href="/addons">Add-on</a> • <a href="/order">Pesan</a> • <a href="/faq">FAQ</a> • <a href="/contact">Kontak</a> • <a href="/privacy">Privasi</a> • <a href="/terms">Syarat</a> • <a href="/revision">Revisi &amp; Pengembalian Dana</a></nav>
+  <p>Kontak resmi: Admin Ardi • WhatsApp <a class="contact-wa" href="#"></a> • Email sumardialdiansyah@gmail.com • Instagram @kafee.in • Jam layanan 08.00–22.00 WIB</p>
+  <p>© <span class="copyright-year"></span> AURELIA INVITATION STUDIO.</p>
+</footer>
+<script src="data.js"></script><script src="site.js"></script><script src="gallery.js"></script>
+<script>
+  const A = window.AURELIA;
+  document.getElementById("category-filter").innerHTML = `<option value="Semua tema">Semua tema</option>` + [...new Set(A.TEMPLATES.map(t => t.category))].map(c => `<option value="${A.esc(c)}">${A.esc(c)}</option>`).join("");
+  ["search","category-filter","sort-filter"].forEach(id => document.getElementById(id).addEventListener("input", renderGallery));
+  document.getElementById("featured-only").addEventListener("change", renderGallery);
+  document.getElementById("reset-filters").addEventListener("click", () => { document.getElementById("search").value=""; document.getElementById("category-filter").value="Semua tema"; document.getElementById("sort-filter").value="featured"; document.getElementById("featured-only").checked=false; renderGallery(); });
+  renderGallery();
+</script>
+</body>
+</html>

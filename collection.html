@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Detail Template — AURELIA INVITATION STUDIO</title>
+<meta name="description" content="Detail template AURELIA INVITATION STUDIO: nama, kode, kategori, deskripsi, fitur, harga awal, demo, dan pilih desain.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="announcement">Konsultasi WhatsApp tersedia 08.00–22.00 WIB • Kupon AURELIA10 aktif.</div>
+<header class="top">
+  <div class="brand">AURELIA <span>INVITATION STUDIO</span></div>
+  <button id="menu-btn" class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+  <nav id="main-nav" aria-label="Navigasi utama">
+    <a href="/">Beranda</a><a href="/collections">Koleksi Desain</a><a href="/pricing">Paket Harga</a><a href="/addons">Add-on</a><a href="/order">Pesan</a><a href="/faq">FAQ</a><a href="/contact">Kontak</a><a class="btn nav-cta wa-link" href="#">Konsultasi WhatsApp</a>
+  </nav>
+</header>
+<main>
+  <p><a href="/collections">← Kembali ke Koleksi</a></p>
+  <div id="detail"></div>
+  <noscript><p>Halaman detail membutuhkan JavaScript untuk menampilkan data template dari katalog.</p></noscript>
+</main>
+<footer>
+  <p><strong>AURELIA INVITATION STUDIO</strong></p>
+  <nav aria-label="Navigasi footer"><a href="/">Beranda</a> • <a href="/collections">Koleksi</a> • <a href="/pricing">Paket</a> • <a href="/order">Pesan</a> • <a href="/faq">FAQ</a> • <a href="/contact">Kontak</a></nav>
+  <p>© <span class="copyright-year"></span> AURELIA INVITATION STUDIO.</p>
+</footer>
+<script src="data.js"></script><script src="site.js"></script>
+<script>
+  const A = window.AURELIA, el = document.getElementById("detail"), slug = A.slugFromUrl(), t = A.getTemplate(slug);
+  if (!t) { el.innerHTML = "<h1>Template tidak ditemukan</h1><p>Kode template tidak ada di katalog 40 template. <a href='/collections'>Kembali ke koleksi</a>.</p>"; }
+  else {
+    document.title = t.name + " — AURELIA INVITATION STUDIO";
+    el.innerHTML = `<div class="envelope reveal revealed"><p class="tag">Detail Template</p><h1>${A.esc(t.name)}</h1><p class="code">Kode: ${t.slug} • ID: ${t.id} • Kategori: ${A.esc(t.category)}${t.featured ? " • Unggulan" : ""}</p></div>
+    <div class="template-thumb thumb-${t.categorySlug}" style="height:220px;margin-top:20px"><strong style="font-size:2rem">${A.esc(t.name)}</strong><span>Pratinjau gaya berbasis kategori — bukan foto desain asli</span></div>
+    <p>${A.esc(t.description)}</p>
+    <h2>Tema dan Karakter Desain</h2><p>Tema: ${A.esc(t.category)}. Karakter desain detail per template belum tersedia di data katalog, jadi tidak dikarang di sini. Pratinjau gaya di atas memakai warna dan nuansa kategori sebagai pembeda visual.</p>
+    <h2>Galeri Gambar</h2><p>Galeri gambar desain asli belum tersedia untuk template ini. Yang tersedia adalah pratinjau gaya di atas dan demo interaktif di bawah.</p>
+    <h2>Fitur yang Didukung</h2><ul>${t.availableFeatures.map(f => `<li>${A.esc(f)}</li>`).join("")}</ul>
+    <p>Detail fitur paket, batas revisi, masa aktif, dan waktu pengerjaan: dikonfigurasi admin.</p>
+    <h2>Harga Awal</h2><p><strong>${A.fmtPrice(t.startingPrice)}</strong> — ${A.esc(t.startingPriceNote)}</p>
+    <div class="cta-row"><a class="btn" href="${t.demoUrl}">Lihat Demo</a><button class="btn secondary" id="pick-btn" type="button">Pilih Desain Ini</button></div>`;
+    document.getElementById("pick-btn").addEventListener("click", () => { let o={}; try{o=JSON.parse(localStorage.getItem("aurelia_order_v2")||"{}");}catch(e){} o.template=t.slug; localStorage.setItem("aurelia_order_v2", JSON.stringify(o)); location.href="/order?template="+t.slug; });
+  }
+</script>
+</body>
+</html>

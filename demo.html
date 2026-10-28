@@ -1,38 +1,67 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Demo Template — AURELIA INVITATION STUDIO</title>
-<meta name="description" content="Halaman pratinjau template AURELIA INVITATION STUDIO berdasarkan data katalog yang benar-benar ada.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232b2b2b'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='32' fill='%23c9a86a' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Demo interaktif template AURELIA INVITATION STUDIO: cover, detail acara, lokasi, RSVP demo, dan pilih template.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div class="announcement">DEMO — Ini adalah contoh pratinjau, bukan undangan asli pelanggan.</div>
 <header class="top">
   <div class="brand">AURELIA <span>INVITATION STUDIO</span></div>
-  <nav><a href="index.html">Beranda</a><a href="index.html#katalog">Katalog</a><a href="index.html#pesan">Pesan</a></nav>
+  <button id="menu-btn" class="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav">Menu</button>
+  <nav id="main-nav" aria-label="Navigasi utama">
+    <a href="/">Beranda</a><a href="/collections">Koleksi Desain</a><a href="/pricing">Paket Harga</a><a href="/addons">Add-on</a><a href="/order">Pesan</a><a href="/faq">FAQ</a><a href="/contact">Kontak</a><a class="btn nav-cta wa-link" href="#">Konsultasi WhatsApp</a>
+  </nav>
 </header>
 <main>
-  <p><a href="index.html#katalog">← Kembali ke katalog</a></p>
-  <div id="demo-page"></div>
-  <noscript><p>Halaman demo membutuhkan JavaScript untuk menampilkan data template dari katalog.</p></noscript>
+  <p><a href="/collections">← Kembali ke Koleksi</a></p>
+  <div id="demo"></div>
+  <noscript><p>Demo membutuhkan JavaScript untuk menampilkan template dari katalog.</p></noscript>
 </main>
-<script src="app.js"></script>
+<footer>
+  <p><strong>AURELIA INVITATION STUDIO</strong> — Demo ini tidak menyimpan RSVP ke database dan tidak mengirim data ke admin.</p>
+  <p>© <span class="copyright-year"></span> AURELIA INVITATION STUDIO.</p>
+</footer>
+<script src="data.js"></script><script src="site.js"></script>
 <script>
-(function(){
-  const el = document.getElementById("demo-page");
-  const code = new URLSearchParams(location.search).get("template") || "";
-  const data = window.AURELIA_DATA;
-  if (!data) { el.innerHTML = "<p>Data katalog tidak dapat dimuat.</p>"; return; }
-  const t = data.templates.find(x => data.slug(x[0]) === code);
-  if (!t) { el.innerHTML = "<h1>Template tidak ditemukan</h1><p>Kode template tidak ada di katalog 40 template. <a href='index.html#katalog'>Kembali ke katalog</a>.</p>"; return; }
-  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
-  el.innerHTML = `<h1>Demo: ${esc(t[0])}</h1><p class="code">Kode: ${code} • Kategori: ${esc(t[1])}${t[2] ? " • Unggulan" : ""}</p>
-  <div class="demo-phone" aria-label="Pratinjau mobile template"><p class="mock-eyebrow">Pratinjau Mobile</p><p class="mock-names">${esc(t[0])}</p><p>Contoh tampilan undangan untuk kategori ${esc(t[1])}.</p><p>Nama pasangan, tanggal, lokasi, dan isi acara diisi sesuai pesananmu. Ini bukan undangan asli pelanggan dan bukan klaim fitur editor — editor undangan masih fase berikutnya.</p><span class="mock-btn">Buka Undangan</span></div>
-  <div class="cta-row"><a class="btn" href="index.html?template=${code}#pesan">Pesan Template Ini</a><a class="btn secondary" href="index.html#katalog">Lihat Template Lain</a></div>`;
-  document.title = "Demo " + t[0] + " — AURELIA INVITATION STUDIO";
-})();
+  const A = window.AURELIA, el = document.getElementById("demo"), slug = A.slugFromUrl(), t = A.getTemplate(slug);
+  if (!t) { el.innerHTML = "<h1>Demo tidak ditemukan</h1><p>Kode template tidak ada di katalog 40 template. <a href='/collections'>Kembali ke koleksi</a>.</p>"; }
+  else {
+    document.title = "Demo " + t.name + " — AURELIA INVITATION STUDIO";
+    // Tanggal contoh DEMO yang jelas ditandai, dipakai hanya untuk hitung mundur pratinjau.
+    const demoDate = new Date("2026-12-12T10:00:00+07:00");
+    el.innerHTML = `<h1>Demo: ${A.esc(t.name)}</h1><p class="code">DEMO • Kode: ${t.slug} • Kategori: ${A.esc(t.category)}${t.featured ? " • Unggulan" : ""}</p>
+    <nav aria-label="Navigasi demo"><a href="#cover">Cover</a> • <a href="#detail">Detail</a> • <a href="#lokasi">Lokasi</a> • <a href="#rsvp">RSVP Demo</a></nav>
+    <div id="cover" class="demo-phone demo-cover">
+      <p class="demo-ribbon">🎀</p>
+      <p class="mock-eyebrow">Undangan ${A.esc(t.category)}</p>
+      <p class="mock-names">Contoh<br>&amp; Pasangan</p>
+      <p>Tanggal contoh: Sabtu, 12 Desember 2026 • Pukul 10.00 WIB</p>
+      <button class="btn" id="open-btn" type="button">Buka Undangan</button>
+      <p class="small">Pita di atas akan terbuka dengan animasi saat undangan dibuka.</p>
+    </div>
+    <div id="demo-body" class="demo-body" hidden>
+      <section id="detail"><h2>Detail Acara (Contoh)</h2><p>Akad dan resepsi contoh untuk template ${A.esc(t.name)}. Tanggal, waktu, dan lokasi asli diisi sesuai pesananmu, bukan tanggal contoh ini.</p><p><strong>Hitung mundur ke tanggal contoh:</strong> <span id="countdown">—</span></p></section>
+      <section id="lokasi"><h2>Lokasi (Contoh)</h2><p>Lokasi contoh: Jakarta, Indonesia. Tautan peta asli diisi sesuai pesananmu.</p><p><a class="btn secondary" href="https://maps.google.com/?q=Jakarta" target="_blank" rel="noopener">Lihat Lokasi Contoh</a></p></section>
+      <section id="rsvp"><h2>RSVP (Demo Saja)</h2><p>Form ini hanya simulasi di perangkatmu. <strong>Tidak tersimpan ke database dan tidak dikirim ke admin.</strong> Untuk pemesanan asli, gunakan form pemesanan.</p>
+      <label>Nama tamu (demo) <input id="rsvp-name" type="text" placeholder="Nama tamu contoh"></label>
+      <label>Kehadiran (demo) <select id="rsvp-attend"><option>Hadir</option><option>Berhalangan</option><option>Ragu</option></select></label>
+      <button class="btn" id="rsvp-btn" type="button">Kirim RSVP Demo</button><p id="rsvp-status" class="small" aria-live="polite"></p></section>
+    </div>
+    <div class="cta-row"><button class="btn" id="pick-btn" type="button">Pilih Template Ini</button><a class="btn secondary" href="/collections">Kembali ke Koleksi</a></div>`;
+    document.getElementById("open-btn").addEventListener("click", () => { document.querySelector(".demo-cover").classList.add("opened"); document.getElementById("demo-body").hidden = false; document.getElementById("detail").scrollIntoView({behavior:"smooth"}); });
+    document.getElementById("pick-btn").addEventListener("click", () => { let o={}; try{o=JSON.parse(localStorage.getItem("aurelia_order_v2")||"{}");}catch(e){} o.template=t.slug; localStorage.setItem("aurelia_order_v2", JSON.stringify(o)); location.href="/order?template="+t.slug; });
+    document.getElementById("rsvp-btn").addEventListener("click", () => { const n=document.getElementById("rsvp-name").value.trim()||"Tamu demo"; const a=document.getElementById("rsvp-attend").value; document.getElementById("rsvp-status").textContent = `Terima kasih, ${n} — status demo: ${a}. Ini hanya tampil di perangkatmu dan tidak tersimpan.`; });
+    function tick(){
+      const diff = demoDate - new Date(); const cd = document.getElementById("countdown"); if (!cd) return;
+      if (diff <= 0) { cd.textContent = "Tanggal contoh sudah lewat."; return; }
+      const d = Math.floor(diff/86400000), h = Math.floor(diff/3600000)%24, m = Math.floor(diff/60000)%60;
+      cd.textContent = d + " hari " + h + " jam " + m + " menit menuju tanggal contoh.";
+    }
+    tick(); setInterval(tick, 60000);
+  }
 </script>
 </body>
 </html>
