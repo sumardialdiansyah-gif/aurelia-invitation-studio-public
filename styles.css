@@ -51,7 +51,8 @@ input[type=checkbox]{width:20px;height:20px;margin:4px 0}
 .small{font-size:.92rem;color:var(--muted)}
 details{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}summary{cursor:pointer;font-weight:700;padding:8px 0}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:flex-start;justify-content:center;padding:20px;overflow:auto;z-index:30}
-.modal-box{background:var(--ivory);border-radius:18px;max-width:520px;width:100%;padding:20px}
+.modal[hidden]{display:none !important}
+.modal-box{background:var(--ivory);border-radius:18px;max-width:520px;width:100%;padding:20px;max-height:calc(100vh - 40px);overflow:auto}
 .demo-phone{border:8px solid var(--ink);border-radius:28px;background:var(--beige);padding:16px;text-align:center;margin:16px 0}
 footer{border-top:1px solid var(--line);padding:28px;text-align:center;color:var(--muted)}
 @media(min-width:700px){

@@ -148,9 +148,9 @@ function openDemo(code) {
   const t = templateBySlug(code); if (!t) return;
   currentDemo = code;
   document.getElementById("demo-content").innerHTML = `<h3 id="demo-title">Demo: ${esc(t[0])}</h3><p class="code">Kode: ${code} • Kategori: ${esc(t[1])}${t[2] ? " • Unggulan" : ""}</p><div class="demo-phone" aria-label="Pratinjau mobile"><p class="mock-eyebrow">Pratinjau Mobile</p><p class="mock-names">${esc(t[0])}</p><p>Contoh tampilan undangan untuk kategori ${esc(t[1])}. Nama pasangan, tanggal, dan isi acara diisi sesuai pesananmu, bukan data pelanggan asli.</p><span class="mock-btn">Buka Undangan</span></div><p><a href="demo.html?template=${code}">Buka halaman demo penuh</a></p>`;
-  const m = document.getElementById("demo-modal"); m.hidden = false; document.getElementById("demo-close").focus();
+  const m = document.getElementById("demo-modal"); m.hidden = false; document.body.style.overflow = "hidden"; document.getElementById("demo-close").focus();
 }
-function closeDemo() { document.getElementById("demo-modal").hidden = true; }
+function closeDemo() { document.getElementById("demo-modal").hidden = true; document.body.style.overflow = ""; }
 document.getElementById("demo-close")?.addEventListener("click", closeDemo);
 document.getElementById("demo-modal")?.addEventListener("click", e => { if (e.target.id === "demo-modal") closeDemo(); });
 document.getElementById("demo-select")?.addEventListener("click", () => { closeDemo(); selectTemplate(currentDemo); });
