@@ -5,7 +5,7 @@
 <title>Koleksi Desain — AURELIA INVITATION STUDIO</title>
 <meta name="description" content="Galeri semua template AURELIA INVITATION STUDIO: 40 template, pencarian, filter tema, demo, dan pilih desain.">
 <link rel="canonical" href="https://aurelia-invitation-studio-public.vercel.app/collections">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <a class="skip" href="#templates">Lewati ke galeri</a>
@@ -38,7 +38,7 @@
   <p>Kontak resmi: Admin Ardi • WhatsApp <a class="contact-wa" href="#"></a> • Email sumardialdiansyah@gmail.com • Instagram @kafee.in • Jam layanan 08.00–22.00 WIB</p>
   <p>© <span class="copyright-year"></span> AURELIA INVITATION STUDIO.</p>
 </footer>
-<script src="data.js"></script><script src="site.js"></script><script src="gallery.js"></script>
+<script src="/data.js"></script><script src="/site.js"></script><script src="/gallery.js"></script>
 <script>
   const A = window.AURELIA;
   document.getElementById("category-filter").innerHTML = `<option value="Semua tema">Semua tema</option>` + [...new Set(A.TEMPLATES.map(t => t.category))].map(c => `<option value="${A.esc(c)}">${A.esc(c)}</option>`).join("");

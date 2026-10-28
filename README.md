@@ -42,6 +42,7 @@ Logika bersama: site.js. Galeri: gallery.js. Pemesanan: order.js.
 ## Error yang ditemukan
 - Tidak ada error sintaks atau error server lokal.
 - Audit awal: proyek sebelumnya satu halaman (index + demo), data hardcoded di app.js, tidak ada thumbnail asli, tidak ada router, tidak ada API/auth, Supabase tidak terhubung live ke situs publik. Semua itu dicatat di sini, bukan disembunyikan.
+- Perbaikan route slug 2026-10-28: /collections dan rute tanpa slug bekerja, tetapi /collections/:slug dan /demo/:slug sempat 404 di live. Penyebabnya: vercel.json memakai cleanUrls:true bersama destination rewrite berekstensi .html (/demo.html, /collection.html), yang tidak berlaku seperti yang diharapkan di bawah cleanUrls. Perbaikannya: rewrite slug saja, dengan destination tanpa ekstensi (/demo, /collection) agar cleanUrls memetakannya ke demo.html/collection.html, dan semua aset halaman diubah ke path absolut (/styles.css, /data.js, dll) agar tidak rusak saat dibuka dari path bertingkat /demo/:slug. Rewrite Vercel hasil perbaikan ini baru bisa diverifikasi setelah deploy berikutnya.
 
 ## Data yang masih membutuhkan aset atau konfigurasi pemilik
 - Gambar/screenshot desain asli tiap template, jika ingin thumbnail benar-benar sesuai desain.
