@@ -1,6 +1,6 @@
 // Data publik versi pertama AURELIA — sama dengan seed Supabase yang sudah terverifikasi.
-// Nomor WhatsApp admin sengaja kosong: isi ADMIN_WHATSAPP_NUMBER sebelum dipakai untuk pembeli asli.
-const ADMIN_WHATSAPP_NUMBER = ""; // contoh format: 6281234567890, tanpa +, spasi, atau strip
+// Nomor WhatsApp admin diisi dari data yang diberikan pemilik pada 2026-10-28.
+const ADMIN_WHATSAPP_NUMBER = "6281290603522";
 const templates = [
 ["Modern Minimalist","Pernikahan",true],["Luxury Gold","Pernikahan",true],["Classic Elegant","Pernikahan",true],["Islamic Elegant","Pernikahan",true],["Floral Garden","Pernikahan",true],["Botanical Green","Pernikahan",true],["Rustic Earth","Pernikahan",false],["Vintage Romance","Pernikahan",false],["Korean Minimal","Pernikahan",true],["Japanese Minimal","Pernikahan",true],["Editorial Magazine","Pernikahan",true],["Black Tie","Pernikahan",true],["Royal Palace","Pernikahan",false],["Traditional Indonesian","Pernikahan",false],["Sundanese Wedding","Pernikahan",false],["Javanese Wedding","Pernikahan",false],["Tropical Destination","Pernikahan",false],["Beach Wedding","Pernikahan",false],["Celestial Night","Pernikahan",true],["Dark Romance","Pernikahan",false],["Watercolor Floral","Pernikahan",false],["Soft Pastel","Pernikahan",false],["Contemporary Cultural","Pernikahan",false],["Cinematic Wedding","Pernikahan",true],["Engagement Luxe","Engagement",false],["Lamaran Adat","Lamaran",false],["Khitanan Ceria","Khitanan",false],["Aqiqah Lembut","Aqiqah",false],["Ulang Tahun Anak","Ulang tahun anak",false],["Ulang Tahun Dewasa","Ulang tahun dewasa",false],["Graduation Day","Graduation",false],["Anniversary Emas","Anniversary",false],["Baby Shower","Baby shower",false],["Gender Reveal","Gender reveal",false],["Corporate Event","Corporate event",false],["Seminar & Webinar","Seminar dan webinar",false],["Grand Opening","Grand opening",false],["Reuni Nostalgia","Reuni",false],["Acara Komunitas","Acara komunitas",false],["Acara Keluarga","Undangan acara keluarga",false]
 ];
@@ -32,7 +32,7 @@ sel.addEventListener("change", updateTotal);
 document.getElementById("order-coupon").addEventListener("input", updateTotal);
 updateTotal();
 document.getElementById("order-btn").addEventListener("click", () => {
-  if (!ADMIN_WHATSAPP_NUMBER) { alert("Nomor WhatsApp admin belum dikonfigurasi. Isi ADMIN_WHATSAPP_NUMBER di app.js sebelum dipakai untuk pembeli asli."); return; }
+  if (!ADMIN_WHATSAPP_NUMBER) { alert("Nomor WhatsApp admin belum dikonfigurasi."); return; }
   const pkg = sel.options[sel.selectedIndex].text;
   const coupon = document.getElementById("order-coupon").value.trim();
   const msg = `Halo AURELIA INVITATION STUDIO, saya ingin memesan undangan digital.\nPaket: ${pkg}\nKupon: ${coupon || "-"}\nMohon info langkah selanjutnya.`;
