@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AURELIA INVITATION STUDIO — Undangan Digital Premium</title>
+<meta name="description" content="AURELIA INVITATION STUDIO: katalog template undangan digital premium, paket, add-on, dan pemesanan via WhatsApp.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">AURELIA <span>INVITATION STUDIO</span></div>
+  <nav><a href="#katalog">Katalog</a><a href="#paket">Paket</a><a href="#addon">Add-on</a><a href="#pesan">Pesan</a></nav>
+</header>
+<main>
+  <section class="hero">
+    <p class="eyebrow">Undangan digital premium • Bahasa Indonesia • Harga Rupiah</p>
+    <h1>Undangan yang terasa premium, tanpa ribet.</h1>
+    <p>Pilih template, pilih paket, lalu pesan lewat WhatsApp. Status pesanan tidak otomatis menjadi lunas — admin memverifikasi transfer manual terlebih dahulu.</p>
+    <p id="wa-note" class="note">Nomor WhatsApp admin belum dikonfigurasi di versi publik ini. Isi nomor admin di pengaturan sebelum tautan pemesanan dipakai untuk pembeli asli.</p>
+    <a class="btn" href="#katalog">Lihat Katalog</a>
+    <a class="btn secondary" href="#paket">Lihat Paket</a>
+  </section>
+
+  <section id="katalog">
+    <h2>Katalog Template</h2>
+    <p>40 template, 12 di antaranya unggulan. Data di bawah ini sama dengan data yang sudah di-seed di Supabase proyek aurelia-invitation-studio.</p>
+    <input id="search" type="search" placeholder="Cari template, misal Botanical…" aria-label="Cari template">
+    <div id="templates" class="grid"></div>
+  </section>
+
+  <section id="paket">
+    <h2>Paket</h2>
+    <div id="packages" class="grid"></div>
+  </section>
+
+  <section id="addon">
+    <h2>Add-on</h2>
+    <div id="addons" class="grid"></div>
+  </section>
+
+  <section id="pesan">
+    <h2>Pesan via WhatsApp</h2>
+    <p>Pilih paket dan add-on di bawah, lalu klik tombol WhatsApp. Pesan akan terbuka di WhatsApp dalam format click-to-chat — kamu tetap harus menekan Kirim di WhatsApp, pesan tidak terkirim otomatis.</p>
+    <label>Paket
+      <select id="order-package"></select>
+    </label>
+    <label>Kupon (opsional)
+      <input id="order-coupon" type="text" placeholder="Contoh: AURELIA10">
+    </label>
+    <p id="order-total"></p>
+    <button id="order-btn" class="btn" type="button">Pesan via WhatsApp</button>
+    <p class="small">Kupon AURELIA10 adalah diskon 10% yang sudah terverifikasi di data awal. Perhitungan akhir dan verifikasi pembayaran tetap dilakukan admin.</p>
+  </section>
+</main>
+<footer>
+  <p>AURELIA INVITATION STUDIO • Versi publik pertama (situs penjualan + katalog). Editor undangan, login pelanggan/admin, dan dashboard lanjutan adalah fase berikutnya dan belum ada di versi ini.</p>
+  <p>Zona waktu: Asia/Jakarta • Format tanggal: DD MMMM YYYY • Nomor: Indonesia +62</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
