@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aurelia-invitation-studio-public.vercel.app/sitemap.xml
