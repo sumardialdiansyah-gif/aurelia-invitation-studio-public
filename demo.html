@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo Template — AURELIA INVITATION STUDIO</title>
+<meta name="description" content="Halaman pratinjau template AURELIA INVITATION STUDIO berdasarkan data katalog yang benar-benar ada.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232b2b2b'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='32' fill='%23c9a86a' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">AURELIA <span>INVITATION STUDIO</span></div>
+  <nav><a href="index.html">Beranda</a><a href="index.html#katalog">Katalog</a><a href="index.html#pesan">Pesan</a></nav>
+</header>
+<main>
+  <p><a href="index.html#katalog">← Kembali ke katalog</a></p>
+  <div id="demo-page"></div>
+  <noscript><p>Halaman demo membutuhkan JavaScript untuk menampilkan data template dari katalog.</p></noscript>
+</main>
+<script src="app.js"></script>
+<script>
+(function(){
+  const el = document.getElementById("demo-page");
+  const code = new URLSearchParams(location.search).get("template") || "";
+  const data = window.AURELIA_DATA;
+  if (!data) { el.innerHTML = "<p>Data katalog tidak dapat dimuat.</p>"; return; }
+  const t = data.templates.find(x => data.slug(x[0]) === code);
+  if (!t) { el.innerHTML = "<h1>Template tidak ditemukan</h1><p>Kode template tidak ada di katalog 40 template. <a href='index.html#katalog'>Kembali ke katalog</a>.</p>"; return; }
+  const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  el.innerHTML = `<h1>Demo: ${esc(t[0])}</h1><p class="code">Kode: ${code} • Kategori: ${esc(t[1])}${t[2] ? " • Unggulan" : ""}</p>
+  <div class="demo-phone" aria-label="Pratinjau mobile template"><p class="mock-eyebrow">Pratinjau Mobile</p><p class="mock-names">${esc(t[0])}</p><p>Contoh tampilan undangan untuk kategori ${esc(t[1])}.</p><p>Nama pasangan, tanggal, lokasi, dan isi acara diisi sesuai pesananmu. Ini bukan undangan asli pelanggan dan bukan klaim fitur editor — editor undangan masih fase berikutnya.</p><span class="mock-btn">Buka Undangan</span></div>
+  <div class="cta-row"><a class="btn" href="index.html?template=${code}#pesan">Pesan Template Ini</a><a class="btn secondary" href="index.html#katalog">Lihat Template Lain</a></div>`;
+  document.title = "Demo " + t[0] + " — AURELIA INVITATION STUDIO";
+})();
+</script>
+</body>
+</html>

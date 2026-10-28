@@ -4,70 +4,176 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AURELIA INVITATION STUDIO — Undangan Digital Premium</title>
-<meta name="description" content="AURELIA INVITATION STUDIO: katalog template undangan digital premium, paket, add-on, dan pemesanan via WhatsApp.">
+<meta name="description" content="AURELIA INVITATION STUDIO: 40 template undangan digital, paket Starter Rp49.000, Signature Rp99.000, Royal Rp179.000, add-on, kupon AURELIA10, dan pemesanan via WhatsApp.">
+<meta property="og:title" content="AURELIA INVITATION STUDIO — Undangan Digital Premium">
+<meta property="og:description" content="Pilih template, pilih paket, pesan lewat WhatsApp. Harga transparan, transfer manual diverifikasi admin.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232b2b2b'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='32' fill='%23c9a86a' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<a class="skip" href="#katalog">Lewati ke katalog</a>
 <header class="top">
-  <div class="brand">AURELIA <span>INVITATION STUDIO</span></div>
-  <nav><a href="#katalog">Katalog</a><a href="#paket">Paket</a><a href="#addon">Add-on</a><a href="#pesan">Pesan</a></nav>
+  <div class="brand" aria-label="AURELIA INVITATION STUDIO">AURELIA <span>INVITATION STUDIO</span></div>
+  <nav aria-label="Navigasi utama">
+    <a href="#katalog">Katalog</a><a href="#paket">Paket</a><a href="#addon">Add-on</a><a href="#pesan">Pesan</a><a href="#faq">FAQ</a><a href="#kontak">Kontak</a>
+  </nav>
 </header>
+
 <main>
-  <section class="hero">
-    <p class="eyebrow">Undangan digital premium • Bahasa Indonesia • Harga Rupiah</p>
-    <h1>Undangan yang terasa premium, tanpa ribet.</h1>
-    <p>Pilih template, pilih paket, lalu pesan lewat WhatsApp. Status pesanan tidak otomatis menjadi lunas — admin memverifikasi transfer manual terlebih dahulu.</p>
-    <p id="wa-note" class="note">Kontak admin: Ardi • WhatsApp 6281290603522 • Email sumardialdiansyah@gmail.com • Instagram @kafee.in • Jam layanan 08.00–22.00 WIB.</p>
-    <a class="btn" href="#katalog">Lihat Katalog</a>
-    <a class="btn secondary" href="#paket">Lihat Paket</a>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-text">
+      <p class="eyebrow">Studio undangan digital • Indonesia • Harga Rupiah</p>
+      <h1 id="hero-title">Undangan digital yang terasa premium, dipesan tanpa ribet.</h1>
+      <p class="lead">Pilih template dari 40 katalog, tentukan paket dan add-on, lalu kirim pesananmu lewat WhatsApp. Kamu akan paham produknya dalam hitungan detik: ini undangan digital, bukan cetak.</p>
+      <div class="cta-row">
+        <a class="btn" href="#katalog">Jelajahi Koleksi</a>
+        <a class="btn secondary" id="hero-wa" href="#">Konsultasi WhatsApp</a>
+      </div>
+      <ul class="benefits">
+        <li><strong>40 template</strong><span>Katalog nyata, bisa dicari dan difilter</span></li>
+        <li><strong>Harga jelas</strong><span>Mulai Rp49.000, tanpa biaya tersembunyi di ringkasan</span></li>
+        <li><strong>Transfer manual</strong><span>Admin memverifikasi bukti sebelum diproses</span></li>
+      </ul>
+      <p class="small">Penting: membuka WhatsApp bukan berarti pembayaran berhasil. Pesanan diproses setelah admin memverifikasi transfer manual.</p>
+    </div>
+    <div class="hero-mock" aria-hidden="true">
+      <div class="mock-phone">
+        <div class="mock-card">
+          <p class="mock-eyebrow">The Wedding Of</p>
+          <p class="mock-names">Contoh<br>Tampilan</p>
+          <p class="mock-divider">✦</p>
+          <p class="mock-date">Tanggal acara diisi<br>sesuai pesananmu</p>
+          <span class="mock-btn">Buka Undangan</span>
+        </div>
+      </div>
+      <p class="mock-caption">Pratinjau gaya undangan, bukan undangan asli pelanggan.</p>
+    </div>
   </section>
 
-  <section id="katalog">
-    <h2>Katalog Template</h2>
-    <p>40 template, 12 di antaranya unggulan. Data di bawah ini sama dengan data yang sudah di-seed di Supabase proyek aurelia-invitation-studio.</p>
-    <input id="search" type="search" placeholder="Cari template, misal Botanical…" aria-label="Cari template">
-    <div id="templates" class="grid"></div>
+  <section id="katalog" aria-labelledby="katalog-title">
+    <h2 id="katalog-title">Katalog Template</h2>
+    <p>Semua 40 template yang sudah ada dipertahankan. Cari berdasarkan nama atau kode, atau filter berdasarkan kategori. Setiap kartu punya tombol demo dan tombol pilih yang benar-benar bekerja.</p>
+    <div class="filters">
+      <label> Cari template
+        <input id="search" type="search" placeholder="Cari, misal Botanical atau kode botanical-green…" aria-label="Cari template">
+      </label>
+      <label> Kategori
+        <select id="category-filter" aria-label="Filter kategori"></select>
+      </label>
+      <label class="check-label"><input id="featured-only" type="checkbox"> Hanya unggulan (12)</label>
+    </div>
+    <p id="result-count" class="small" aria-live="polite"></p>
+    <div id="templates" class="grid catalog-grid"></div>
   </section>
 
-  <section id="paket">
-    <h2>Paket</h2>
-    <div id="packages" class="grid"></div>
+  <section id="paket" aria-labelledby="paket-title">
+    <h2 id="paket-title">Paket</h2>
+    <p>Harga di bawah ini sama dengan data yang sudah berjalan. Detail fitur tiap paket yang belum ditentukan tidak dikarang: ditandai “Dikonfigurasi admin”.</p>
+    <div id="packages" class="grid package-grid"></div>
+    <div class="table-wrap">
+      <table aria-label="Perbandingan paket">
+        <thead><tr><th scope="col">Perbandingan</th><th scope="col">Starter</th><th scope="col">Signature</th><th scope="col">Royal</th><th scope="col">Custom</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Harga</th><td>Rp49.000</td><td>Rp99.000</td><td>Rp179.000</td><td>Sesuai kebutuhan</td></tr>
+          <tr><th scope="row">Tingkat harga</th><td>Dasar</td><td>Menengah</td><td>Tertinggi dari paket tetap</td><td>Dihitung admin</td></tr>
+          <tr><th scope="row">Pemesanan via WhatsApp</th><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+          <tr><th scope="row">Add-on bisa ditambah</th><td>Ya</td><td>Ya</td><td>Ya</td><td>Ya</td></tr>
+          <tr><th scope="row">Kupon AURELIA10 (10% dari harga paket)</th><td>Berlaku</td><td>Berlaku</td><td>Berlaku</td><td>Diskon 0 karena harga paket 0; konfirmasi admin</td></tr>
+          <tr><th scope="row">Detail fitur, batas revisi, dan masa aktif</th><td colspan="4">Dikonfigurasi admin — belum ditentukan di situs ini, jadi tidak ditulis sebagai janji.</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
-  <section id="addon">
-    <h2>Add-on</h2>
-    <div id="addons" class="grid"></div>
+  <section id="addon" aria-labelledby="addon-title">
+    <h2 id="addon-title">Add-on</h2>
+    <p>Harga add-on di bawah ini sama dengan data yang ada. Deskripsinya menjelaskan nama add-on itu sendiri, tanpa menambah batas atau janji yang belum ditentukan.</p>
+    <div id="addons" class="grid addon-grid"></div>
   </section>
 
-  <section id="pesan">
-    <h2>Pesan via WhatsApp</h2>
-    <p>Pilih paket dan add-on di bawah, lalu klik tombol WhatsApp. Pesan akan terbuka di WhatsApp dalam format click-to-chat — kamu tetap harus menekan Kirim di WhatsApp, pesan tidak terkirim otomatis.</p>
-    <label>Paket
-      <select id="order-package"></select>
-    </label>
-    <label>Kupon (opsional)
-      <input id="order-coupon" type="text" placeholder="Contoh: AURELIA10">
-    </label>
-    <p id="order-total"></p>
-    <button id="order-btn" class="btn" type="button">Pesan via WhatsApp</button>
-    <p class="small">Kupon AURELIA10 adalah diskon 10% yang sudah terverifikasi di data awal. Perhitungan akhir dan verifikasi pembayaran tetap dilakukan admin.</p>
-    <h3>Pembayaran transfer manual</h3>
-    <p>Bank BCA • Nomor rekening 6881131649 • Atas nama Sumardi. Setelah transfer, kirim bukti pembayaran lewat WhatsApp ke admin untuk diverifikasi sebelum pesanan diproses.</p>
+  <section id="pesan" aria-labelledby="pesan-title">
+    <h2 id="pesan-title">Form Pemesanan</h2>
+    <p class="steps" aria-label="Alur pemesanan"><span>1 Pilih template</span> → <span>2 Pilih paket &amp; add-on</span> → <span>3 Isi data</span> → <span>4 Cek ringkasan</span> → <span>5 WhatsApp</span></p>
+    <form id="order-form" novalidate>
+      <div class="form-grid">
+        <label> Nama pelanggan *
+          <input id="order-name" type="text" autocomplete="name" required placeholder="Nama lengkap">
+        </label>
+        <label> Kontak (WhatsApp / email) *
+          <input id="order-contact" type="text" autocomplete="tel" required placeholder="Nomor WhatsApp atau email aktif">
+        </label>
+        <label> Template *
+          <select id="order-template" required></select>
+        </label>
+        <label> Paket *
+          <select id="order-package" required></select>
+        </label>
+      </div>
+      <fieldset>
+        <legend>Add-on (opsional, bisa pilih lebih dari satu)</legend>
+        <div id="order-addons" class="addon-checks"></div>
+      </fieldset>
+      <label> Kupon (opsional)
+        <input id="order-coupon" type="text" placeholder="Contoh: AURELIA10" autocomplete="off">
+      </label>
+      <label> Catatan untuk admin (opsional)
+        <textarea id="order-note" rows="3" placeholder="Contoh: tanggal acara yang diinginkan, atau pertanyaan singkat."></textarea>
+      </label>
+      <p id="form-error" class="error" role="alert" hidden></p>
+      <div class="summary" aria-labelledby="ringkasan-title">
+        <h3 id="ringkasan-title">Ringkasan Pesanan</h3>
+        <dl id="order-summary"></dl>
+        <p id="order-total"></p>
+        <p class="small" id="custom-note" hidden>Paket Custom: harga paket dihitung admin sesuai kebutuhan. Total di atas baru mencakup add-on yang dipilih, belum harga paket Custom.</p>
+      </div>
+      <button id="order-btn" class="btn big" type="submit">Lanjutkan ke WhatsApp</button>
+      <p class="small">Dengan menekan tombol ini, WhatsApp terbuka dengan pesan yang sudah terisi. Kamu tetap harus menekan Kirim di WhatsApp. Pesan tidak terkirim otomatis, dan pembayaran tidak dianggap berhasil hanya karena WhatsApp terbuka.</p>
+      <h3>Pembayaran transfer manual</h3>
+      <p>Bank BCA • Nomor rekening 6881131649 • Atas nama Sumardi. Setelah transfer, kirim bukti pembayaran lewat WhatsApp ke admin untuk diverifikasi sebelum pesanan diproses.</p>
+    </form>
   </section>
 
-  <section id="kontak">
-    <h2>Kontak</h2>
+  <section id="faq" aria-labelledby="faq-title">
+    <h2 id="faq-title">FAQ</h2>
+    <details><summary>Bagaimana cara memesan?</summary><p>Pilih template, paket, dan add-on di form pemesanan, isi nama dan kontak, cek ringkasan, lalu lanjutkan ke WhatsApp dan tekan Kirim di WhatsApp.</p></details>
+    <details><summary>Apakah membuka WhatsApp berarti saya sudah membayar?</summary><p>Tidak. Membuka WhatsApp hanya menyiapkan pesan. Pembayaran dilakukan lewat transfer manual, dan pesanan diproses setelah admin memverifikasi bukti transfer.</p></details>
+    <details><summary>Apakah kupon AURELIA10 masih berlaku?</summary><p>Ya, kupon AURELIA10 aktif dan memberi diskon 10% dari harga paket. Diskon dihitung otomatis di ringkasan.</p></details>
+    <details><summary>Bagaimana kebijakan revisi dan pengembalian dana?</summary><p>Belum ditentukan secara spesifik di situs ini. Konfirmasi kebijakan revisi dan pengembalian dana dengan admin lewat WhatsApp sebelum melakukan transfer, supaya tidak ada janji yang salah.</p></details>
+    <details><summary>Apakah ada testimoni pelanggan?</summary><p>Belum ada testimoni pelanggan nyata yang ditampilkan di situs ini. Bagian testimoni tidak ditambahkan sampai ada testimoni dari pelanggan nyata.</p></details>
+  </section>
+
+  <section id="kebijakan" aria-labelledby="kebijakan-title">
+    <h2 id="kebijakan-title">Kebijakan Privasi &amp; Syarat Layanan</h2>
+    <h3>Kebijakan privasi</h3>
+    <p>Data yang kamu isi di form pemesanan (nama, kontak, pilihan template/paket/add-on, dan catatan) hanya dipakai untuk menyiapkan pesan WhatsApp ke admin. Situs ini tidak memakai payment gateway dan tidak menyimpan kartu atau kredensial apa pun di halaman ini. Jangan mengirim kata sandi atau kode verifikasi lewat form ini.</p>
+    <h3>Syarat layanan</h3>
+    <p>Harga yang tampil adalah harga paket dan add-on yang berlaku di situs ini. Total akhir di ringkasan dihitung dari harga paket + add-on − diskon kupon yang berlaku. Jika ada perbedaan, admin mengonfirmasi total final lewat WhatsApp sebelum pembayaran diproses. Kebijakan revisi dan pengembalian dana mengikuti konfirmasi admin, karena belum ditetapkan secara tertulis di situs ini.</p>
+  </section>
+
+  <section id="kontak" aria-labelledby="kontak-title">
+    <h2 id="kontak-title">Kontak Resmi</h2>
     <p>Admin: Ardi<br>
-    WhatsApp: 6281290603522<br>
+    WhatsApp: <a id="contact-wa" href="#">6281290603522</a><br>
     Email: sumardialdiansyah@gmail.com<br>
     Instagram: @kafee.in<br>
     Jam layanan: 08.00–22.00 WIB</p>
+    <p class="small">Editor undangan, login pelanggan/admin, dan dashboard lanjutan adalah fase berikutnya dan belum ada di versi situs publik ini. Yang sudah berjalan di situs ini: katalog, paket, add-on, demo pratinjau, form pemesanan WhatsApp, FAQ, dan informasi kebijakan di atas.</p>
   </section>
 </main>
+
 <footer>
-  <p>AURELIA INVITATION STUDIO • Versi publik pertama (situs penjualan + katalog). Editor undangan, login pelanggan/admin, dan dashboard lanjutan adalah fase berikutnya dan belum ada di versi ini.</p>
-  <p>Zona waktu: Asia/Jakarta • Format tanggal: DD MMMM YYYY • Nomor: Indonesia +62</p>
+  <p>AURELIA INVITATION STUDIO • Zona waktu: Asia/Jakarta • Format tanggal: DD MMMM YYYY • Nomor: Indonesia +62</p>
 </footer>
+
+<div id="demo-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="demo-title">
+  <div class="modal-box">
+    <button id="demo-close" class="btn secondary" type="button" aria-label="Tutup demo">Tutup</button>
+    <div id="demo-content"></div>
+    <button id="demo-select" class="btn big" type="button">Pesan Template Ini</button>
+  </div>
+</div>
+
 <script src="app.js"></script>
 </body>
 </html>
